@@ -1,26 +1,410 @@
 @import "tailwindcss";
 
+/* Base styles */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Theme variables - Updated to match screenshot gradient */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Updated colors to match blue-purple gradient */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  /* Primary updated to match gradient blue */
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  /* Updated chart colors to match theme */
+  --chart-1: 221.2 83.2% 53.3%;
+  --chart-2: 262.1 83.3% 57.8%;
+  --chart-3: 280 100% 70%;
+  --chart-4: 190 90% 50%;
+  --chart-5: 160 84% 39%;
+  --radius: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
+  --chart-1: 221.2 83.2% 53.3%;
+  --chart-2: 262.1 83.3% 57.8%;
+  --chart-3: 280 100% 70%;
+  --chart-4: 190 90% 50%;
+  --chart-5: 160 84% 39%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Apply base styles */
+* {
+  border-color: hsl(var(--border));
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
+
+/* Typography to match screenshot style */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
+h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 2.25rem;
+  }
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+@media (min-width: 768px) {
+  h3 {
+    font-size: 1.875rem;
+  }
+}
+
+p {
+  line-height: 1.625;
+}
+
+/* Gradient utilities */
+.gradient {
+  background-image: linear-gradient(to bottom right, #3b82f6, #8b5cf6, #d946ef);
+}
+
+.gradient-title {
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(to right, #3b82f6, #8b5cf6, #d946ef);
+}
+
+.gradient-subtitle {
+  font-weight: 600;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(to right, #60a5fa, #a78bfa);
+}
+
+.gradient-button {
+  background-image: linear-gradient(to right, #3b82f6, #8b5cf6);
+  color: white;
+  font-weight: 500;
+}
+
+.gradient-button:hover {
+  opacity: 0.9;
+}
+
+.gradient-card {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-accent {
+  background-image: linear-gradient(45deg, #60a5fa, #c4b5fd, #f0abfc);
+}
+
+/* 3D Hero Image Effects */
+.hero-image-wrapper {
+  perspective: 1200px;
+}
+
+.hero-image {
+  transform-style: preserve-3d;
+  transform: rotateX(15deg) rotateY(-5deg);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.hero-image.scrolled {
+  transform: rotateX(0deg) rotateY(0deg);
+}
+
+.hero-image-wrapper.scrolled {
+  transform: translateY(40px);
+}
+
+/* Animated gradient background */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientMove 5s ease infinite;
+}
+
+/* Smooth fade-in animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Glow effects for gradient elements */
+.glow {
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+.text-glow {
+  text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+}
+
+/* FIXED LAYOUT CSS */
+/* Fix form layout */
+form > div {
+  width: 100% !important;
+}
+
+/* Fix grid layout */
+.grid {
+  display: grid !important;
+}
+
+/* Fix select dropdowns */
+[data-radix-select-content] {
+  min-width: var(--radix-select-trigger-width) !important;
+  z-index: 1000 !important;
+  position: relative !important;
+}
+
+/* Fix spacing */
+.space-y-2 > *:not(:first-child) {
+  margin-top: 0.5rem !important;
+}
+
+.space-y-4 > *:not(:first-child) {
+  margin-top: 1rem !important;
+}
+
+.space-y-6 > *:not(:first-child) {
+  margin-top: 1.5rem !important;
+}
+
+/* Fix text overflow */
+.truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Fix form container */
+.max-w-2xl {
+  max-width: 42rem !important;
+}
+
+/* Fix drawer/dialog */
+[data-radix-drawer-overlay],
+[data-radix-dialog-overlay] {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  z-index: 9999 !important;
+}
+
+[data-radix-drawer-content],
+[data-radix-dialog-content] {
+  background-color: hsl(var(--background)) !important;
+  z-index: 10000 !important;
+}
+
+/* Ensure proper form element widths */
+input, select, button {
+  max-width: 100% !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #2563eb, #7c3aed);
+}
+
+/* Transitions */
+.gradient-button {
+  transition: opacity 0.2s ease;
+}
+
+.hero-image {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* FIX FOR TRANSPARENT DIALOGS - ADD THIS */
+.dialog-fix {
+  background-color: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 0.75rem !important;
+  padding: 1.5rem !important;
+}
+
+.dialog-fix * {
+  color: hsl(var(--foreground)) !important;
+}
+
+.dialog-fix input,
+.dialog-fix select {
+  background-color: white !important;
+  color: black !important;
+  border: 1px solid hsl(var(--border)) !important;
+  padding: 0.5rem !important;
+  border-radius: 0.375rem !important;
+}
+
+/* Ensure proper contrast */
+[role="dialog"],
+[data-state="open"] {
+  background-color: hsl(var(--background)) !important;
+}
+
+/* Make all dialog content visible */
+[data-radix-drawer-overlay],
+[data-radix-dialog-overlay] {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  z-index: 9999 !important;
+}
+
+/* TEMPORARY: Add border to see dialog boundaries */
+[data-radix-dialog-content] {
+  border: 2px solid red !important; /* Remove after testing */
+}
+
+[data-radix-dialog-overlay] {
+  background-color: rgba(0, 0, 0, 0.2) !important; /* Very light */
+}
+
+
+.hero-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  color: transparent;
+  background-image: linear-gradient(
+    90deg,
+    #2563eb,
+    #7c3aed,
+    #ec4899
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  margin-bottom: 1.25rem;
+}
+
+/* Hero subtitle */
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.0vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.6;
+  color: hsl(var(--muted-foreground));
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+}
+
+/* Subtle glow for premium feel */
+.hero-title {
+  text-shadow: 0 12px 40px rgba(124, 58, 237, 0.25);
+}
+
+
+
+
+
