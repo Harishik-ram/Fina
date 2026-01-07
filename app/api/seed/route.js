@@ -1,6 +1,15 @@
-import { seedTransactions } from "@/actions/seed";
+import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function POST() {
+  if (process.env.NODE_ENV === "production") {
+    return NextResponse.json(
+      { error: "Seed disabled in production" },
+      { status: 403 }
+    );
+  }
+
+  const { seedTransactions } = await import("@/actions/seed");
   const result = await seedTransactions();
-  return Response.json(result);
+
+  return NextResponse.json(result);
 }
